@@ -4,7 +4,7 @@
   'use strict';
 
   const SVGNS = 'http://www.w3.org/2000/svg';
-  const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'Ω'];
+  const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'out'];
   const ROUND_WORDS = 24;   // input 4, subkeys 6, steps 14 (layout of wasm `trace`)
   const OUT_BASE = 8 * ROUND_WORDS;
 
@@ -264,7 +264,7 @@
         9: [st(8), '⊙', z(6)], 10: [st(7), '⊞', st(9)], 11: [st(1), '⊕', st(9)], 12: [st(3), '⊕', st(9)],
         13: [st(2), '⊕', st(10)], 14: [st(4), '⊕', st(10)],
       }[step];
-      return `step ${step} · ${FORMULA[step - 1]} = ${word(terms[0])} ${terms[1]} ${word(terms[2])} = ${word(st(step))}`;
+      return `step ${step}: ${FORMULA[step - 1]} = ${word(terms[0])} ${terms[1]} ${word(terms[2])} = ${word(st(step))}`;
     });
     bindHover(half, i => {
       const t = specimen.trace;
@@ -291,7 +291,7 @@
           setVal(half.keys[i], t[OUT_BASE + 4 + i], animate);
           setVal(half.outs[i], t[OUT_BASE + 8 + i], animate);
         }
-        cap.textContent = `fig. 3 — the output transformation: the middle words cross back, four last subkeys${specimen.dir === 'dec' ? ' (decryption keys)' : ''}.`;
+        cap.textContent = `output transformation: the middle words cross back, then the last four subkeys${specimen.dir === 'dec' ? ' (decryption keys)' : ''}.`;
         return;
       }
       const base = specimen.round * ROUND_WORDS;
@@ -301,7 +301,7 @@
       const o = [t[base + 20], t[base + 21], t[base + 22], t[base + 23]];
       o.forEach((v, i) => setVal(full.outs[i], v, animate));
       const z0 = specimen.round * 6 + 1;
-      cap.textContent = `fig. 3 — round ${ROMAN[specimen.round]}, subkeys Z${z0}–Z${z0 + 5}${specimen.dir === 'dec' ? ' of the decryption schedule' : ''}. Hover a node.`;
+      cap.textContent = `round ${ROMAN[specimen.round]}, subkeys Z${z0}–Z${z0 + 5}${specimen.dir === 'dec' ? ' of the decryption schedule' : ''}. Hover a node.`;
     }
 
     function recompute() {
@@ -321,7 +321,7 @@
       specimen.trace = W.trace(key, block, specimen.dir === 'dec');
       const t = specimen.trace;
       out.textContent = [t[OUT_BASE + 8], t[OUT_BASE + 9], t[OUT_BASE + 10], t[OUT_BASE + 11]].map(word).join(' ');
-      paint(true);
+      paint(false);
       specimen.listeners.forEach(fn => fn());
     }
 
@@ -443,7 +443,7 @@
     function run() {
       const key = window.IDEA.randomBytes(16);
       const iv = window.IDEA.randomBytes(8);
-      keyOut.textContent = `key ${toHex(key, 2)} · iv ${toHex(iv)}`;
+      keyOut.textContent = `key ${toHex(key, 2)}, IV ${toHex(iv)}`;
       draw('ang-ecb', W.encrypt(key, W.Mode.Ecb, new Uint8Array(0), false, px));
       draw('ang-cbc', W.encrypt(key, W.Mode.Cbc, iv, false, px));
       draw('ang-ctr', W.encrypt(key, W.Mode.Ctr, iv, false, px));

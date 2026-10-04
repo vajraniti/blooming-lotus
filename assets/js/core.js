@@ -74,7 +74,7 @@
     }
     const b = utf8.encode(value);
     if (b.length !== 16) {
-      const wide = b.length !== Array.from(value).length ? ' — letters outside ASCII take 2–4 bytes' : '';
+      const wide = b.length !== Array.from(value).length ? ' (letters outside ASCII take 2–4 bytes)' : '';
       throw new Error(`key: need exactly 16 bytes, got ${b.length}${wide}`);
     }
     return b;

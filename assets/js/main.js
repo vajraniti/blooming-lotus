@@ -2,21 +2,16 @@
 (function () {
   'use strict';
 
-  const status = document.getElementById('wasm-status');
-  const say = (cls, txt) => {
-    status.classList.add(cls);
-    status.querySelector('.txt').textContent = txt;
-  };
-
   window.IDEA.ready
     .then(wasm => {
       window.Anatomy.init(wasm);
       window.Lab.init(wasm);
-      say('ready', 'rust → wasm · alive');
     })
     .catch(e => {
-      say('fail', 'cipher failed to wake');
-      // Visible in the console with the real reason; the page itself stays readable.
+      // Silent when it works; one plain line when it does not. The real reason goes to the console.
+      const note = document.getElementById('wasm-status');
+      note.textContent = 'The cipher (WebAssembly) failed to load, so the demos below are off. Details are in the browser console.';
+      note.hidden = false;
       console.error('IDEA: could not start the WebAssembly cipher:', e);
     });
 })();

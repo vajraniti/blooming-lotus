@@ -24,7 +24,7 @@
         const k = parseKey(fmtSeg.get(), input.value);
         input.classList.remove('bad');
         hint.classList.remove('bad');
-        hint.textContent = `128 bits · ${wordsOf(k).map(word).join(' ')}`;
+        hint.textContent = `128 bits: ${wordsOf(k).map(word).join(' ')}`;
         return k;
       } catch (e) {
         input.classList.toggle('bad', input.value.length > 0);
@@ -101,17 +101,17 @@
         if (dir === 'enc') {
           const out = W.encrypt(k, m, iv, p, utf8.encode(plain.value));
           cipher.value = writeCipher(out);
-          stat.textContent = `${out.length} bytes · ${Math.ceil(out.length / 8)} blocks · ${(performance.now() - t0).toFixed(2)} ms`;
+          stat.textContent = `${out.length} bytes, ${Math.ceil(out.length / 8)} blocks, ${(performance.now() - t0).toFixed(2)} ms`;
         } else {
           const out = W.decrypt(k, m, iv, p, readCipher());
           let text;
           try {
             text = utf8Strict.decode(out);
           } catch (_) {
-            throw new Error(`decrypted ${out.length} bytes are not UTF-8 text — wrong key, IV or mode? hex: ${toHex(out.subarray(0, 24), 8)}${out.length > 24 ? '…' : ''}`);
+            throw new Error(`decrypted ${out.length} bytes are not valid UTF-8. Wrong key, IV or mode? First bytes: ${toHex(out.subarray(0, 24), 8)}${out.length > 24 ? '…' : ''}`);
           }
           plain.value = text;
-          stat.textContent = `${out.length} bytes · ${(performance.now() - t0).toFixed(2)} ms`;
+          stat.textContent = `${out.length} bytes, ${(performance.now() - t0).toFixed(2)} ms`;
         }
       } catch (e) {
         err.textContent = e.message || String(e);
@@ -157,7 +157,7 @@
     const bar = $('reli-bar'), err = $('reli-err'), out = $('reli-out');
     const keyIn = $('reli-key');
     const keyFmt = seg($('reli-keyfmt'), v => {
-      keyIn.placeholder = v === 'hex' ? '32 hex digits' : 'exactly 16 characters';
+      keyIn.placeholder = v === 'hex' ? '32 hex digits' : '16 bytes of text';
       keyIn.maxLength = v === 'hex' ? 32 : 64;
       key.check(); refresh();
     });
@@ -178,7 +178,7 @@
       const head = new Uint8Array(await f.slice(0, 6).arrayBuffer());
       sealedHeader = head.length === 6 && head[0] === 0x49 && head[1] === 0x44 && head[2] === 0x45 && head[3] === 0x41 && head[4] === 1;
       $('drop-main').textContent = f.name;
-      $('drop-sub').textContent = `${fmtSize(f.size)} · ${sealedHeader ? `sealed, ${head[5] === 2 ? 'CTR' : 'CBC'} — unseal it` : 'not sealed — seal it'}`;
+      $('drop-sub').textContent = `${fmtSize(f.size)}, ${sealedHeader ? `sealed file (${head[5] === 2 ? 'CTR' : 'CBC'})` : 'not sealed yet'}`;
       refresh();
     }
 
@@ -192,10 +192,10 @@
     function offer(blob, name, rows) {
       if (url) URL.revokeObjectURL(url);
       url = URL.createObjectURL(blob);
-      const lines = rows.map(([k, v]) => `<span class="k">${k}</span>${v}`).join('<br>');
-      out.innerHTML = `${lines}<br><span class="k">result</span><a download></a>`;
+      const lines = rows.map(([k, v]) => `<span class="k">${k}:</span> ${v}`).join('<br>');
+      out.innerHTML = `${lines}<br><span class="k">result:</span> <a download></a>`;
       const a = out.querySelector('a');
-      a.href = url; a.download = name; a.textContent = `↓ ${name}`;
+      a.href = url; a.download = name; a.textContent = `download ${name}`;
     }
 
     async function stream(from, to, step) {
