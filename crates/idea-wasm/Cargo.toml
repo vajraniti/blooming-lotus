@@ -1,0 +1,18 @@
+[package]
+name = "idea-wasm"
+version = "0.1.0"
+description = "WebAssembly bindings of the `idea` crate for the site."
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+idea = { path = "../idea", features = ["seal"] }
+wasm-bindgen = "0.2.129"
+
+[lints]
+workspace = true
