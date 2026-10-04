@@ -38,8 +38,8 @@
   --bone-2: #c9c5bc;
   --ash: #8a8780;
   --ash-2: #5f5d58;
-  --slab: #171614;      /* fields, buttons: marked by fill, not by outlines */
-  --slab-2: #22211e;
+  --slab: #1f1e1b;      /* fields, buttons: marked by fill, not by outlines */
+  --slab-2: #2b2a26;
   --wire: #3b3a35;      /* only the round diagram and the bit strip draw lines */
   --relic: #d3145a;
 
@@ -48,7 +48,7 @@
   --mono: "IBM Plex Mono", ui-monospace, "Courier New", monospace;
   --web: Arial, Helvetica, sans-serif;
 
-  --rail: 220px;
+  --rail: 250px;
   --gut: clamp(48px, 6vw, 112px);
 }
 
@@ -84,28 +84,51 @@ code { font: 400 .78em var(--mono); color: var(--bone); }
 }
 .grain[hidden] { display: none; }
 
-/* ── menu ───────────────────────────────────────────────────────────────── */
+/* menu */
 
 .rail {
   position: fixed; left: 0; top: 0; bottom: 0; width: var(--rail);
   z-index: 50;
   display: flex; flex-direction: column;
-  padding: 28px 20px 24px 28px;
+  padding: 30px 26px 26px 30px;
   /* no panel: the grain runs under the menu too, so there is no edge between them */
   background: none;
 }
-.rail-mark { display: block; color: var(--bone); width: 132px; margin-left: -4px; }
-.rail-mark svg { width: 100%; height: 62px; display: block; }
+.rail-mark { display: block; color: var(--bone); width: 150px; margin-left: -6px; }
+.rail-mark svg { width: 100%; height: 72px; display: block; }
 
 .rail-list {
-  margin: 36px 0 0; padding: 0 0 0 2.6em;
-  list-style: upper-roman;
-  font: 400 15px/1.45 var(--web); color: var(--ash-2);
+  list-style: none; margin: 44px 0 0; padding: 0 0 0 22px;
+  position: relative;
 }
-.rail-list li { padding: 3px 0; }
-.rail-list a { color: var(--bone-2); text-decoration: none; }
-.rail-list a:hover { color: var(--bone); text-decoration: underline; }
-.rail-list a.on { color: var(--bone); text-decoration: underline; }
+.rail-list::before {
+  /* the chain the beads hang on */
+  content: ""; position: absolute; left: 4px; top: 8px; bottom: 8px; width: 1px;
+  background: repeating-linear-gradient(to bottom, var(--wire) 0 3px, transparent 3px 6px);
+}
+.rail-list li { position: relative; }
+.rail-list a {
+  display: grid; grid-template-columns: 66px 1fr; align-items: baseline;
+  padding: 7px 0; text-decoration: none; color: var(--ash);
+  transition: color .25s;
+}
+.rail-list a::before {
+  /* bead */
+  content: ""; position: absolute; left: -21px; top: 50%;
+  width: 7px; height: 7px; margin-top: -3px; border-radius: 50%;
+  background: var(--ink); border: 1px solid var(--wire);
+  transition: background .25s, border-color .25s;
+}
+.rail-list a:hover, .rail-list a.on { color: var(--bone); }
+.rail-list a:hover::before { border-color: var(--bone); }
+.rail-list a.on::before {
+  /* the active bead becomes a small cross */
+  width: 9px; height: 13px; margin-top: -7px; left: -22px; border: 0; border-radius: 0;
+  background: var(--relic);
+  clip-path: polygon(40% 0, 60% 0, 60% 28%, 100% 28%, 100% 42%, 60% 42%, 60% 100%, 40% 100%, 40% 42%, 0 42%, 0 28%, 40% 28%);
+}
+.rail-num { font: 400 18px/1 var(--gothic); }
+.rail-lbl { font: 400 11px/1.3 var(--mono); letter-spacing: .14em; text-transform: uppercase; }
 
 .rail-opt { margin: auto 0 0; font: 400 13px/1.4 var(--web); }
 .rail-opt button { background: none; border: 0; padding: 0; color: var(--ash); text-decoration: underline; text-underline-offset: 3px; }
@@ -115,7 +138,7 @@ main { margin-left: var(--rail); position: relative; z-index: 1; overflow: hidde
 
 .load-fail { margin: 0; padding: 14px var(--gut); font: 400 15px/1.4 var(--web); color: var(--relic); }
 
-/* ── shared type ────────────────────────────────────────────────────────── */
+/* shared type */
 
 /* small text is plain Arial: labels, captions, hints. Monospace is kept for data. */
 .fig-note, .lbl, .hint, .mono-dim { font: 400 14px/1.45 var(--web); color: var(--ash); }
@@ -127,20 +150,15 @@ main { margin-left: var(--rail); position: relative; z-index: 1; overflow: hidde
 .dash { padding: 0 0 0 1.1em; margin: 0 0 1em; }
 .dash li { margin-bottom: .4em; }
 
-/* ── hero ───────────────────────────────────────────────────────────────── */
+/* hero */
 
 .hero {
   position: relative; min-height: max(100vh, 760px);
   padding: 30px var(--gut) 40px;
   display: flex; flex-direction: column;
 }
-.plate-head {
-  position: relative; z-index: 3;
-  display: flex; justify-content: space-between; gap: 40px;
-  font: 400 14px/1.45 var(--web); color: var(--bone-2);
-}
+.plate-head { position: relative; z-index: 3; font: 400 14px/1.45 var(--web); color: var(--bone-2); }
 .plate-head p { margin: 0; }
-.plate-head .right { text-align: right; }
 
 .hero-word {
   position: relative; z-index: 2;
@@ -152,28 +170,26 @@ main { margin-left: var(--rail); position: relative; z-index: 1; overflow: hidde
 
 .relic.hero-relic { position: absolute; margin: 0; z-index: 1; }
 .r-halo { width: clamp(220px, 21vw, 330px); right: 7%; top: 13%; }
-.r-hand { width: clamp(150px, 12vw, 200px); left: 6%; top: 19%; }
+.r-hand { width: clamp(150px, 12vw, 200px); left: var(--gut); top: 19%; }
 .r-veil { width: clamp(110px, 8.5vw, 140px); left: 43%; top: 25%; }
 
 .echo {
-  position: absolute; z-index: 3; right: calc(var(--gut) + 1%); top: 51%;
-  font: 400 30px/1.12 var(--web); color: #8d8b86;
+  position: absolute; z-index: 3; right: var(--gut); top: 51%;
+  /* scales down on narrow screens so it never runs into the wordmark's A */
+  font: 400 clamp(21px, 2.05vw, 30px)/1.12 var(--web); color: #8d8b86;
   white-space: pre;
 }
 .echo p { margin: 0; }
-.echo p:nth-child(2) { padding-left: .3em; }
-.echo p:nth-child(3) { padding-left: 1.6em; }
-.echo p:nth-child(4) { padding-left: .9em; }
 
-.hero-note { position: relative; margin: 34px 0 0; font: 400 13px/1.4 var(--web); color: var(--ash-2); }
+.hero-note { position: relative; margin: 34px 0 0; font: 400 13px/1.4 var(--web); color: var(--ash); }
 
-/* ── photos ─────────────────────────────────────────────────────────────── */
+/* photos */
 
 .relic { position: relative; margin: 0; }
 .relic img { display: block; width: 100%; height: auto; filter: grayscale(1) contrast(1.06) brightness(.92); }
 .relic.color img { filter: contrast(1.04) brightness(.9); }
 
-/* ── sections ───────────────────────────────────────────────────────────── */
+/* sections */
 
 .sec { position: relative; padding: 110px var(--gut) 40px; }
 #operations { padding-top: 60px; }
@@ -190,7 +206,7 @@ main { margin-left: var(--rail); position: relative; z-index: 1; overflow: hidde
 }
 .sec-sub { margin: 14px 0 0; font: 400 16px/1.4 var(--web); color: var(--ash); }
 
-/* ── I. genesis ─────────────────────────────────────────────────────────── */
+/* I. genesis */
 
 .genesis-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, .75fr); gap: 6vw; align-items: start; }
 .lede { font-size: 1.32em; line-height: 1.42; color: var(--bone); }
@@ -201,7 +217,7 @@ main { margin-left: var(--rail); position: relative; z-index: 1; overflow: hidde
 .chain li { margin: 0 0 4px; }
 .chain b { display: inline-block; min-width: 4.6em; font-weight: 500; color: var(--bone); }
 
-/* ── II. operations ─────────────────────────────────────────────────────── */
+/* II. operations */
 
 .ops { display: grid; grid-template-columns: repeat(3, 1fr); gap: 56px; align-items: start; }
 .op-glyph { display: block; width: 72px; height: 72px; margin: 0 0 20px; color: var(--bone); overflow: visible; }
@@ -224,7 +240,7 @@ main { margin-left: var(--rail); position: relative; z-index: 1; overflow: hidde
 .heresy-line { margin: 4px 0 0; font: 400 17px/1.6 var(--mono); color: var(--bone-2); }
 .heresy-line .no { color: var(--relic); }
 
-/* ── III. the round ─────────────────────────────────────────────────────── */
+/* III. the round */
 
 .round-grid { display: grid; grid-template-columns: minmax(350px, .66fr) minmax(0, 1.34fr); gap: 4vw; align-items: start; }
 #sp-key { font-size: 14px; letter-spacing: 0; }
@@ -253,8 +269,7 @@ main { margin-left: var(--rail); position: relative; z-index: 1; overflow: hidde
   font: 400 21px/1 var(--serif); color: var(--ash); position: relative;
 }
 .round-tabs button:hover { color: var(--bone); }
-.round-tabs button.on { color: var(--bone); }
-.round-tabs button.on::after { content: ""; position: absolute; left: 30%; right: 30%; bottom: 0; height: 2px; background: var(--relic); }
+.round-tabs button.on { color: var(--bone); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 6px; }
 
 .round-svg svg { display: block; width: 100%; height: auto; overflow: visible; }
 .round-tip { min-height: 3.2em; margin: 14px 0 0; font: 400 14px/1.6 var(--mono); color: var(--bone-2); }
@@ -275,7 +290,7 @@ main { margin-left: var(--rail); position: relative; z-index: 1; overflow: hidde
 .rd-ma-lbl { font: 400 11px var(--mono); fill: var(--ash-2); }
 .rd-io { font: 500 16px var(--mono); fill: var(--bone); letter-spacing: .06em; }
 
-/* ── IV. key schedule ───────────────────────────────────────────────────── */
+/* IV. key schedule */
 
 .bits { display: grid; grid-template-columns: repeat(128, 1fr); gap: 1px; height: 64px; }
 .bits span { background: #1b1b1a; transition: background .15s, transform .15s; }
@@ -283,41 +298,39 @@ main { margin-left: var(--rail); position: relative; z-index: 1; overflow: hidde
 .bits span.word-edge { box-shadow: -1px 0 0 var(--wire); }
 .bits span.lit { background: var(--relic); transform: scaleY(1.25); }
 .bits span.one.lit { background: #ff4f8f; }
-.bits-scale { display: flex; justify-content: space-between; margin: 8px 0 56px; font: 400 12px var(--web); color: var(--ash-2); }
+.bits-scale { display: flex; justify-content: space-between; margin: 8px 0 56px; font: 400 12px var(--web); color: var(--ash); }
 
 .sched { display: grid; grid-template-columns: 70px repeat(6, 1fr); row-gap: 2px; }
 .sched > div { padding: 9px 10px; font: 400 15px/1 var(--mono); letter-spacing: .06em; }
-.sched .rlab { font: 400 20px/1 var(--serif); color: var(--ash); padding-left: 0; letter-spacing: 0; }
-.sched .hd { font: 400 12px var(--web); color: var(--ash-2); letter-spacing: 0; }
+.sched .rlab { font: 400 20px/1 var(--serif); color: var(--ash); padding-left: 0; letter-spacing: 0; align-self: end; }
+.sched .hd { font: 400 12px var(--web); color: var(--ash); letter-spacing: 0; }
 .sched .sk { transition: background .15s, color .15s; color: var(--bone-2); }
-.sched .sk small { display: block; margin-bottom: 5px; font: 400 11px var(--web); color: var(--ash-2); letter-spacing: 0; }
+.sched .sk small { display: block; margin-bottom: 5px; font: 400 11px var(--web); color: var(--ash); letter-spacing: 0; }
 .sched .sk:hover, .sched .sk.lit { background: var(--bone); color: var(--ink); }
 .sched .sk:hover small, .sched .sk.lit small { color: var(--ash-2); }
 
-/* ── V. inversion ───────────────────────────────────────────────────────── */
+/* V. inversion */
 
 .inv-grid { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 6vw; align-items: start; }
-.inv-fig { margin-top: 56px; width: 48%; margin-left: 14%; }
+.inv-fig { margin-top: 56px; width: 48%; }
 .inv-table { display: grid; grid-template-columns: 56px repeat(6, 1fr); row-gap: 2px; }
 .inv-table > div { padding: 8px 8px; font: 400 13px/1.3 var(--mono); }
-.inv-table .rlab { font: 400 19px/1 var(--serif); color: var(--ash); padding-left: 0; }
-.inv-table .hd { font: 400 12px var(--web); color: var(--ash-2); }
+.inv-table .rlab { font: 400 19px/1 var(--serif); color: var(--ash); padding-left: 0; align-self: end; }
+.inv-table .hd { font: 400 12px var(--web); color: var(--ash); }
 .inv-table .f { display: block; color: var(--ash); font-size: 11px; margin-bottom: 4px; }
 .inv-table .f i { font-style: normal; color: var(--relic); }
 .inv-table .v { color: var(--bone); letter-spacing: .05em; }
 
-/* ── VI. wounds ─────────────────────────────────────────────────────────── */
+/* VI. wounds */
 
 .wounds-grid { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 5vw; align-items: start; }
-.wounds-fig { position: sticky; top: 50px; margin-left: calc(var(--gut) * -.45); }
+.wounds-fig { position: sticky; top: 50px; }
 .wounds { list-style: none; margin: 0; padding: 0; }
-.wounds li { display: grid; grid-template-columns: 130px 1fr; gap: 24px; padding: 0 0 40px; }
-.w-num { margin: 0; font: 300 44px/1 var(--serif); color: var(--bone); }
-.w-num sup { font-size: .5em; vertical-align: super; line-height: 0; }
+.wounds li { padding: 0 0 28px; }
 .w-txt { margin: 0; color: var(--bone-2); font-size: 19px; }
 .wounds-end { max-width: 40em; margin: 40px 0 0; color: var(--bone-2); }
 
-/* ── VII. modes ─────────────────────────────────────────────────────────── */
+/* VII. modes */
 
 .angels { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
 .angels figure { margin: 0; }
@@ -333,9 +346,9 @@ main { margin-left: var(--rail); position: relative; z-index: 1; overflow: hidde
 .btn-ghost { background: none; padding: 10px 4px; color: var(--bone-2); text-decoration: underline; text-underline-offset: 3px; }
 .btn-ghost:hover:not(:disabled) { background: none; color: var(--bone); }
 
-/* ── VIII. lab ──────────────────────────────────────────────────────────── */
+/* VIII. lab */
 
-.lab { display: grid; grid-template-columns: 330px minmax(0, 1fr); gap: 5vw; align-items: start; }
+.lab { display: grid; grid-template-columns: 350px minmax(0, 1fr); gap: 5vw; align-items: start; }
 .row { display: flex; gap: 10px; align-items: center; }
 .row .mono-in { flex: 1; }
 .hint { min-height: 1.5em; margin: 6px 0 0; }
@@ -348,9 +361,10 @@ textarea {
 #lab-cipher { overflow-wrap: anywhere; color: var(--bone-2); }
 .lab-acts { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 16px 0; }
 .lab-acts .mono-dim { flex-basis: 100%; min-height: 1.5em; }
-.lab-fig { margin-top: 48px; width: 64%; margin-left: 8%; }
+.lab-fig { margin-top: 48px; width: 64%; }
+.nobr { white-space: nowrap; }
 
-/* ── IX. reliquary ──────────────────────────────────────────────────────── */
+/* IX. reliquary */
 
 .reli { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, .9fr); gap: 6vw; align-items: start; }
 .drop {
@@ -378,10 +392,9 @@ textarea {
 .layout-table code { font-size: inherit; }
 .layout-table caption { text-align: left; }
 
-/* ── colophon ───────────────────────────────────────────────────────────── */
+/* colophon */
 
-.colophon { position: relative; padding: 150px var(--gut) 70px; }
-.colo-mark { display: block; width: 30%; height: auto; aspect-ratio: 2937 / 1345; color: var(--bone); }
-.colo-txt { max-width: 44em; margin: 40px 0 0; font: 400 14px/1.6 var(--web); color: var(--ash); }
+.colophon { position: relative; padding: 110px var(--gut) 60px; }
+.colo-txt { max-width: 44em; margin: 0; font: 400 14px/1.6 var(--web); color: var(--ash); }
 .colo-txt + .colo-txt { margin-top: 12px; }
 .colo-txt a { color: var(--bone-2); }

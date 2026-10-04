@@ -20,15 +20,15 @@
 <nav class="rail" aria-label="Sections">
   <a class="rail-mark" href="#hero" aria-label="Back to the top"><svg><use href="#wordmark"/></svg></a>
   <ol class="rail-list">
-    <li><a href="#genesis">Genesis</a></li>
-    <li><a href="#operations">Operations</a></li>
-    <li><a href="#round">The round</a></li>
-    <li><a href="#schedule">Key schedule</a></li>
-    <li><a href="#inversion">Inversion</a></li>
-    <li><a href="#wounds">Wounds</a></li>
-    <li><a href="#modes">ECB angel</a></li>
-    <li><a href="#lab">Ritual</a></li>
-    <li><a href="#reliquary">Reliquary</a></li>
+    <li><a href="#genesis"><span class="rail-num">I</span><span class="rail-lbl" data-scramble>Genesis</span></a></li>
+    <li><a href="#operations"><span class="rail-num">II</span><span class="rail-lbl" data-scramble>Operations</span></a></li>
+    <li><a href="#round"><span class="rail-num">III</span><span class="rail-lbl" data-scramble>The round</span></a></li>
+    <li><a href="#schedule"><span class="rail-num">IV</span><span class="rail-lbl" data-scramble>Key schedule</span></a></li>
+    <li><a href="#inversion"><span class="rail-num">V</span><span class="rail-lbl" data-scramble>Inversion</span></a></li>
+    <li><a href="#wounds"><span class="rail-num">VI</span><span class="rail-lbl" data-scramble>Wounds</span></a></li>
+    <li><a href="#modes"><span class="rail-num">VII</span><span class="rail-lbl" data-scramble>ECB angel</span></a></li>
+    <li><a href="#lab"><span class="rail-num">VIII</span><span class="rail-lbl" data-scramble>Ritual</span></a></li>
+    <li><a href="#reliquary"><span class="rail-num">IX</span><span class="rail-lbl" data-scramble>Reliquary</span></a></li>
   </ol>
   <p class="rail-opt"><button type="button" id="grain-toggle" aria-pressed="true">grain: on</button></p>
 </nav>
@@ -37,11 +37,10 @@
 
 <p class="load-fail" id="wasm-status" role="alert" hidden></p>
 
-<!-- ─────────────────────────── HERO ─────────────────────────── -->
+<!-- hero -->
 <section class="hero" id="hero">
   <div class="plate-head">
     <p>International Data Encryption Algorithm.<br>A block cipher by Xuejia Lai and James L. Massey, 1991.</p>
-    <p class="right">Rust compiled to WebAssembly,<br>running in your browser.</p>
   </div>
 
   <figure class="hero-relic relic r-halo"><img src="assets/img/relic-halo.jpg" alt="A sketched angel with a halo, seen from behind"></figure>
@@ -57,7 +56,7 @@
   <p class="hero-note">“can you read me?” after 0, 2, 5 and 8½ rounds, bytes shown as Latin-1</p>
 </section>
 
-<!-- ─────────────────────────── I. GENESIS ─────────────────────────── -->
+<!-- i. genesis -->
 <section class="sec" id="genesis">
   <header class="sec-head">
     <h2 class="sec-title">Genesis</h2>
@@ -85,7 +84,7 @@
   </ul>
 </section>
 
-<!-- ─────────────────────────── II. OPERATIONS ─────────────────────────── -->
+<!-- ii. operations -->
 <section class="sec" id="operations">
   <header class="sec-head">
     <h2 class="sec-title">Three<br>operations</h2>
@@ -126,7 +125,7 @@
   </div>
 </section>
 
-<!-- ─────────────────────────── III. THE ROUND ─────────────────────────── -->
+<!-- iii. the round -->
 <section class="sec" id="round">
   <header class="sec-head">
     <h2 class="sec-title">The round</h2>
@@ -158,7 +157,7 @@
   </div>
 </section>
 
-<!-- ─────────────────────────── IV. KEY SCHEDULE ─────────────────────────── -->
+<!-- iv. key schedule -->
 <section class="sec" id="schedule">
   <header class="sec-head">
     <h2 class="sec-title">Key<br>schedule</h2>
@@ -172,7 +171,7 @@
   <div class="sched" id="sched"></div>
 </section>
 
-<!-- ─────────────────────────── V. INVERSION ─────────────────────────── -->
+<!-- v. inversion -->
 <section class="sec" id="inversion">
   <header class="sec-head">
     <h2 class="sec-title">Inversion</h2>
@@ -195,7 +194,7 @@
   </div>
 </section>
 
-<!-- ─────────────────────────── VI. WOUNDS ─────────────────────────── -->
+<!-- vi. wounds -->
 <section class="sec sec-wounds" id="wounds">
   <header class="sec-head">
     <h2 class="sec-title">Wounds</h2>
@@ -207,23 +206,20 @@
     </figure>
     <ol class="wounds">
       <li>
-        <p class="w-num">2<sup>51</sup></p>
-        <p class="w-txt"><b>Weak keys.</b> Daemen, Govaerts and Vandewalle (CRYPTO ’93) found a class of 2<sup>51</sup> keys that a chosen-plaintext attacker can detect in use. Later work found larger weak-key classes. Out of 2<sup>128</sup> keys, a randomly chosen one is practically never weak.</p>
+        <p class="w-txt"><b>Weak keys (2<sup>51</sup>).</b> Daemen, Govaerts and Vandewalle (CRYPTO ’93) found a class of 2<sup>51</sup> keys that a chosen-plaintext attacker can detect in use. Later work found larger weak-key classes. Out of 2<sup>128</sup> keys, a randomly chosen one is practically never weak.</p>
       </li>
       <li>
-        <p class="w-num">2<sup>126.1</sup></p>
-        <p class="w-txt"><b>Narrow bicliques.</b> Khovratovich, Leurent and Rechberger (EUROCRYPT 2012) recovered the key of the full 8½ rounds about two bits faster than brute force. A theoretical result, not a practical attack.</p>
+        <p class="w-txt"><b>Narrow bicliques (2<sup>126.1</sup>).</b> Khovratovich, Leurent and Rechberger (EUROCRYPT 2012) recovered the key of the full 8½ rounds about two bits faster than brute force. A theoretical result, not a practical attack.</p>
       </li>
       <li>
-        <p class="w-num">2<sup>32</sup></p>
-        <p class="w-txt"><b>64-bit block size.</b> After about 2<sup>32</sup> blocks (32&nbsp;GiB) under one key, ciphertext blocks start to collide (birthday paradox), and collisions leak plaintext. Bhargavan and Leurent showed it in practice against 64-bit ciphers in TLS and OpenVPN in 2016 (<a href="https://sweet32.info/">Sweet32</a>). This, not the attacks above, is the practical reason to avoid 64-bit block ciphers today.</p>
+        <p class="w-txt"><b>64-bit block size (2<sup>32</sup>).</b> After about 2<sup>32</sup> blocks (32&nbsp;GiB) under one key, ciphertext blocks start to collide (birthday paradox), and collisions leak plaintext. Bhargavan and Leurent showed it in practice against 64-bit ciphers in TLS and OpenVPN in 2016 (<a href="https://sweet32.info/">Sweet32</a>). This, not the attacks above, is the practical reason to avoid 64-bit block ciphers today.</p>
       </li>
     </ol>
   </div>
-  <p class="wounds-end">No practical break of the full cipher with a random key is known. The file tool below avoids the 2<sup>32</sup>-block limit by deriving a fresh key for every file.</p>
+  <p class="wounds-end">No practical break of the full cipher with a random key is known. The file tool below avoids the <span class="nobr">2<sup>32</sup>-block</span> limit by deriving a fresh key for every file.</p>
 </section>
 
-<!-- ─────────────────────────── VII. MODES ─────────────────────────── -->
+<!-- vii. modes -->
 <section class="sec" id="modes">
   <header class="sec-head">
     <h2 class="sec-title">The angel<br>in ECB</h2>
@@ -241,7 +237,7 @@
   <p class="angels-ctl"><button type="button" class="btn" id="ang-rekey">new key</button><span class="mono-dim" id="ang-key"></span></p>
 </section>
 
-<!-- ─────────────────────────── VIII. LAB ─────────────────────────── -->
+<!-- viii. lab -->
 <section class="sec" id="lab">
   <header class="sec-head">
     <h2 class="sec-title">Ritual</h2>
@@ -316,7 +312,7 @@ are you real?</textarea>
   </div>
 </section>
 
-<!-- ─────────────────────────── IX. RELIQUARY ─────────────────────────── -->
+<!-- ix. reliquary -->
 <section class="sec" id="reliquary">
   <header class="sec-head">
     <h2 class="sec-title">Reliquary</h2>
@@ -358,7 +354,7 @@ are you real?</textarea>
     </div>
 
     <div class="reli-right prose">
-      <p>A sealed file is more than plain IDEA. IDEA alone does not notice tampering: anyone could flip bits in the file. And one key for every file would run into the 2<sup>32</sup>-block limit from <a href="#wounds">Wounds</a>. So:</p>
+      <p>A sealed file is more than plain IDEA. IDEA alone does not notice tampering: anyone could flip bits in the file. And one key for every file would run into the <span class="nobr">2<sup>32</sup>-block</span> limit from <a href="#wounds">Wounds</a>. So:</p>
       <ul class="dash">
         <li>a random 8-byte IV is drawn for every file;</li>
         <li>HKDF-SHA256, salted with that IV, turns your 128-bit key into a fresh IDEA key and a separate MAC key;</li>
@@ -380,7 +376,6 @@ are you real?</textarea>
 </section>
 
 <footer class="colophon">
-  <svg class="colo-mark"><use href="#wordmark"/></svg>
   <p class="colo-txt">IDEA is by Xuejia Lai and James&nbsp;L.&nbsp;Massey, ETH Zürich, 1991. The cipher on this page is Rust compiled to WebAssembly and is checked against the NESSIE test vectors and OpenSSL.</p>
   <p class="colo-txt">Further reading:
     <a href="https://en.wikipedia.org/wiki/International_Data_Encryption_Algorithm">IDEA on Wikipedia</a>,

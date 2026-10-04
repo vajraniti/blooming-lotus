@@ -18,7 +18,7 @@
     return n;
   }
 
-  /* ── hero: the sentence after rounds 0, 2, 5 and 8½ ─────────────────────── */
+  /* hero: the sentence after rounds 0, 2, 5 and 8½ */
 
   function latin1(bytes) {
     let s = '';
@@ -55,7 +55,7 @@
     });
   }
 
-  /* ── II. operations ─────────────────────────────────────────────────────── */
+  /* II. operations */
 
   function operations() {
     const calcs = {};
@@ -96,7 +96,7 @@
     update();
   }
 
-  /* ── III. the round diagram ─────────────────────────────────────────────── */
+  /* III. the round diagram */
 
   const L = [130, 290, 450, 610];
   const FORMULA = [
@@ -336,7 +336,7 @@
     recompute();
   }
 
-  /* ── IV. key schedule ───────────────────────────────────────────────────── */
+  /* IV. key schedule */
 
   function schedule() {
     const bitsHost = document.getElementById('key-bits');
@@ -385,7 +385,7 @@
     update();
   }
 
-  /* ── V. inversion table ─────────────────────────────────────────────────── */
+  /* V. inversion table */
 
   function inversion() {
     const host = document.getElementById('inv-table');
@@ -423,7 +423,7 @@
     update();
   }
 
-  /* ── VII. the angel in ECB ──────────────────────────────────────────────── */
+  /* VII. the angel in ECB */
 
   function angels() {
     const src = window.ANGEL_PIXELS;

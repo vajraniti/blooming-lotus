@@ -1,4 +1,4 @@
-/* § VIII text lab and § IX sealed files. */
+/* Text lab and file sealing. */
 (function () {
   'use strict';
 
@@ -40,7 +40,7 @@
     };
   }
 
-  /* ── VIII. lab ──────────────────────────────────────────────────────────── */
+  /* VIII. lab */
 
   function lab() {
     const keyIn = $('lab-key'), ivIn = $('lab-iv'), plain = $('lab-plain'), cipher = $('lab-cipher');
@@ -149,7 +149,7 @@
     run('enc');
   }
 
-  /* ── IX. reliquary ──────────────────────────────────────────────────────── */
+  /* IX. reliquary */
 
   function reliquary() {
     const drop = $('drop'), fileIn = $('file-in');

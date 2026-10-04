@@ -60,7 +60,15 @@
     })(start);
   }
 
-  /* menu: underline the section that holds the middle of the screen */
+  /* menu labels fall through hex digits on hover, then settle */
+  function scrambles() {
+    document.querySelectorAll('[data-scramble]').forEach(el => {
+      const text = el.textContent;
+      el.closest('a').addEventListener('mouseenter', () => scramble(el, text, 380));
+    });
+  }
+
+  /* menu: mark the section that holds the middle of the screen */
   function railSpy() {
     const links = Array.from(document.querySelectorAll('.rail-list a'));
     const map = new Map(links.map(a => [a.getAttribute('href').slice(1), a]));
@@ -82,6 +90,7 @@
 
   document.addEventListener('DOMContentLoaded', () => {
     grain();
+    scrambles();
     railSpy();
   });
 })();
