@@ -14,6 +14,10 @@ Open `index.html` in a desktop browser. No build and no server needed: the
 WebAssembly binary is inlined in `assets/wasm/idea_wasm_bytes.js` because
 browsers refuse to `fetch()` a `.wasm` file from `file://`.
 
+The page has an English and a Russian version (switch at the bottom of the
+menu; the choice is remembered, the default follows the browser language).
+Russian copy lives in `assets/js/i18n-ru.js`, keyed by the English text.
+
 ## What is in the page
 
 - **III. The round** — interactive diagram of all 14 steps for any key and
