@@ -69,8 +69,8 @@
       <p>Phil Zimmermann chose it for PGP&nbsp;2.0, so for years PGP encrypted e-mail with IDEA. It was patented, and commercial users paid Ascom for a licence until the European patent ran out on 16&nbsp;May&nbsp;2011 and the American one on 7&nbsp;January&nbsp;2012.</p>
       <p>IDEA has no S-boxes and no lookup tables. It works on 16-bit words, combines them with three operations, and cuts the key into 52 subkeys. Sections II–IV go through each part.</p>
     </div>
-    <figure class="relic color genesis-fig">
-      <img src="assets/img/relic-portrait.jpg" alt="A portrait in goth make-up before a wall of drawn crosses, a cathedral and chains; one cross is magenta" loading="lazy">
+    <figure class="relic genesis-fig">
+      <img src="assets/img/relic-angel.jpg" alt="The word “angel <33” sprayed through a stencil, three times" loading="lazy">
     </figure>
   </div>
 
@@ -163,7 +163,10 @@
     <h2 class="sec-title">Key<br>schedule</h2>
   </header>
 
-  <p class="prose narrow">The 128-bit key is split into eight 16-bit words, Z1…Z8. Then the whole key is rotated left by 25 bits and split again into Z9…Z16. Six rotations give the 52 subkeys: six per round and four for the output transformation. Hover a subkey to see which key bits it came from.</p>
+  <div class="sched-intro">
+    <p class="prose narrow">The 128-bit key is split into eight 16-bit words, Z1…Z8. Then the whole key is rotated left by 25 bits and split again into Z9…Z16. Six rotations give the 52 subkeys: six per round and four for the output transformation. Hover a subkey to see which key bits it came from.</p>
+    <figure class="relic sched-fig"><img src="assets/img/relic-rei.jpg" alt="Evangelion: a long row of identical Rei Ayanami clones" loading="lazy"></figure>
+  </div>
 
   <div class="bits" id="key-bits" aria-label="the 128 bits of the key"></div>
   <div class="bits-scale"><span>bit 0</span><span>32</span><span>64</span><span>96</span><span>127</span></div>
@@ -351,6 +354,7 @@ are you real?</textarea>
         <p class="err" id="reli-err" role="alert"></p>
         <div class="reli-out" id="reli-out"></div>
       </div>
+      <figure class="relic color reli-fig"><img src="assets/img/relic-wrong.jpg" alt="Blurred red text: something about me isn’t right" loading="lazy"></figure>
     </div>
 
     <div class="reli-right prose">

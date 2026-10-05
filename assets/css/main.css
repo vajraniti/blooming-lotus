@@ -212,6 +212,8 @@ main { margin-left: var(--rail); position: relative; z-index: 1; overflow: hidde
 .lede { font-size: 1.32em; line-height: 1.42; color: var(--bone); }
 .initial { float: left; font: 400 5.1em/.78 var(--gothic); margin: .06em .1em 0 -.04em; color: var(--bone); }
 .genesis-fig { margin-top: 150px; width: 88%; }
+.sched-intro { display: grid; grid-template-columns: minmax(0, 40em) 280px; gap: 6vw; align-items: start; margin-bottom: 56px; }
+.sched-intro .prose.narrow { margin: 0; }
 
 .chain { list-style: none; margin: 64px 0 0; padding: 0; max-width: 40em; color: var(--bone-2); }
 .chain li { margin: 0 0 4px; }
@@ -363,6 +365,7 @@ textarea {
 .lab-acts .mono-dim { flex-basis: 100%; min-height: 1.5em; }
 .lab-fig { margin-top: 48px; width: 64%; }
 .nobr { white-space: nowrap; }
+.reli-fig { margin-top: 64px; width: 60%; }
 
 /* IX. reliquary */
 
