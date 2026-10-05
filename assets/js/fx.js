@@ -28,7 +28,7 @@
     } catch (_) { /* storage blocked (private window, file:// policy): keep the default */ }
     function apply() {
       layer.hidden = !on;
-      btn.textContent = `grain: ${on ? 'on' : 'off'}`;
+      btn.textContent = window.I18N.L(`grain: ${on ? 'on' : 'off'}`, `зерно: ${on ? 'вкл' : 'выкл'}`);
       btn.setAttribute('aria-pressed', String(on));
     }
     btn.addEventListener('click', () => {
@@ -39,6 +39,7 @@
       } catch (_) { /* not remembered across visits, the switch still works for this one */ }
     });
     apply();
+    window.I18N.onChange(apply);
   }
 
   /* scramble: digits run through hex before settling; used by the hero and the round diagram */
@@ -63,8 +64,9 @@
   /* menu labels fall through hex digits on hover, then settle */
   function scrambles() {
     document.querySelectorAll('[data-scramble]').forEach(el => {
-      const text = el.textContent;
-      el.closest('a').addEventListener('mouseenter', () => scramble(el, text, 380));
+      // i18n.js keeps data-final up to date when the language changes
+      if (!el.dataset.final) el.dataset.final = el.textContent;
+      el.closest('a').addEventListener('mouseenter', () => scramble(el, el.dataset.final, 380));
     });
   }
 

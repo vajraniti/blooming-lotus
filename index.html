@@ -20,16 +20,17 @@
 <nav class="rail" aria-label="Sections">
   <a class="rail-mark" href="#hero" aria-label="Back to the top"><svg><use href="#wordmark"/></svg></a>
   <ol class="rail-list">
-    <li><a href="#genesis"><span class="rail-num">I</span><span class="rail-lbl" data-scramble>Genesis</span></a></li>
-    <li><a href="#operations"><span class="rail-num">II</span><span class="rail-lbl" data-scramble>Operations</span></a></li>
-    <li><a href="#round"><span class="rail-num">III</span><span class="rail-lbl" data-scramble>The round</span></a></li>
-    <li><a href="#schedule"><span class="rail-num">IV</span><span class="rail-lbl" data-scramble>Key schedule</span></a></li>
-    <li><a href="#inversion"><span class="rail-num">V</span><span class="rail-lbl" data-scramble>Inversion</span></a></li>
-    <li><a href="#wounds"><span class="rail-num">VI</span><span class="rail-lbl" data-scramble>Wounds</span></a></li>
-    <li><a href="#modes"><span class="rail-num">VII</span><span class="rail-lbl" data-scramble>ECB angel</span></a></li>
-    <li><a href="#lab"><span class="rail-num">VIII</span><span class="rail-lbl" data-scramble>Ritual</span></a></li>
-    <li><a href="#reliquary"><span class="rail-num">IX</span><span class="rail-lbl" data-scramble>Reliquary</span></a></li>
+    <li><a href="#genesis"><span class="rail-num">I</span><span class="rail-lbl" data-scramble data-i18n>Genesis</span></a></li>
+    <li><a href="#operations"><span class="rail-num">II</span><span class="rail-lbl" data-scramble data-i18n>Operations</span></a></li>
+    <li><a href="#round"><span class="rail-num">III</span><span class="rail-lbl" data-scramble data-i18n>The round</span></a></li>
+    <li><a href="#schedule"><span class="rail-num">IV</span><span class="rail-lbl" data-scramble data-i18n>Key schedule</span></a></li>
+    <li><a href="#inversion"><span class="rail-num">V</span><span class="rail-lbl" data-scramble data-i18n>Inversion</span></a></li>
+    <li><a href="#wounds"><span class="rail-num">VI</span><span class="rail-lbl" data-scramble data-i18n>Wounds</span></a></li>
+    <li><a href="#modes"><span class="rail-num">VII</span><span class="rail-lbl" data-scramble data-i18n>ECB angel</span></a></li>
+    <li><a href="#lab"><span class="rail-num">VIII</span><span class="rail-lbl" data-scramble data-i18n>Ritual</span></a></li>
+    <li><a href="#reliquary"><span class="rail-num">IX</span><span class="rail-lbl" data-scramble data-i18n>Reliquary</span></a></li>
   </ol>
+  <p class="rail-opt rail-lang"><button type="button" data-lang="en">en</button> / <button type="button" data-lang="ru">ru</button></p>
   <p class="rail-opt"><button type="button" id="grain-toggle" aria-pressed="true">grain: on</button></p>
 </nav>
 
@@ -40,7 +41,7 @@
 <!-- hero -->
 <section class="hero" id="hero">
   <div class="plate-head">
-    <p>International Data Encryption Algorithm.<br>A block cipher by Xuejia Lai and James L. Massey, 1991.</p>
+    <p data-i18n>International Data Encryption Algorithm.<br>A block cipher by Xuejia Lai and James L. Massey, 1991.</p>
   </div>
 
   <figure class="hero-relic relic r-halo"><img src="assets/img/relic-halo.jpg" alt="A sketched angel with a halo, seen from behind"></figure>
@@ -53,28 +54,28 @@
     <p>can you read me?</p><p>can you read me?</p><p>can you read me?</p><p>can you read me?</p>
   </div>
 
-  <p class="hero-note">“can you read me?” after 0, 2, 5 and 8½ rounds, bytes shown as Latin-1</p>
+  <p class="hero-note" data-i18n>“can you read me?” after 0, 2, 5 and 8½ rounds, bytes shown as Latin-1</p>
 </section>
 
 <!-- i. genesis -->
 <section class="sec" id="genesis">
   <header class="sec-head">
-    <h2 class="sec-title">Genesis</h2>
+    <h2 class="sec-title" data-i18n>Genesis</h2>
   </header>
 
   <div class="genesis-grid">
     <div class="prose">
-      <p class="lede"><span class="initial">I</span>n 1990, at EUROCRYPT in Aarhus, Xuejia Lai and James&nbsp;L.&nbsp;Massey of ETH Zürich proposed a new block cipher. They called it PES, the Proposed Encryption Standard.</p>
-      <p>A year later they strengthened the round against differential cryptanalysis, which Eli Biham and Adi Shamir had just published. The new version was called IPES (Improved PES) and was later renamed IDEA.</p>
-      <p>Phil Zimmermann chose it for PGP&nbsp;2.0, so for years PGP encrypted e-mail with IDEA. It was patented, and commercial users paid Ascom for a licence until the European patent ran out on 16&nbsp;May&nbsp;2011 and the American one on 7&nbsp;January&nbsp;2012.</p>
-      <p>IDEA has no S-boxes and no lookup tables. It works on 16-bit words, combines them with three operations, and cuts the key into 52 subkeys. Sections II–IV go through each part.</p>
+      <p class="lede" data-i18n><span class="initial">I</span>n 1990, at EUROCRYPT in Aarhus, Xuejia Lai and James&nbsp;L.&nbsp;Massey of ETH Zürich proposed a new block cipher. They called it PES, the Proposed Encryption Standard.</p>
+      <p data-i18n>A year later they strengthened the round against differential cryptanalysis, which Eli Biham and Adi Shamir had just published. The new version was called IPES (Improved PES) and was later renamed IDEA.</p>
+      <p data-i18n>Phil Zimmermann chose it for PGP&nbsp;2.0, so for years PGP encrypted e-mail with IDEA. It was patented, and commercial users paid Ascom for a licence until the European patent ran out on 16&nbsp;May&nbsp;2011 and the American one on 7&nbsp;January&nbsp;2012.</p>
+      <p data-i18n>IDEA has no S-boxes and no lookup tables. It works on 16-bit words, combines them with three operations, and cuts the key into 52 subkeys. Sections II–IV go through each part.</p>
     </div>
     <figure class="relic genesis-fig">
       <img src="assets/img/relic-angel.jpg" alt="The word “angel <33” sprayed through a stencil, three times" loading="lazy">
     </figure>
   </div>
 
-  <ul class="chain">
+  <ul class="chain" data-i18n>
     <li><b>1990</b> PES presented at EUROCRYPT in Aarhus</li>
     <li><b>1991</b> IPES, later renamed IDEA</li>
     <li><b>PGP 2.0</b> encrypts mail with IDEA</li>
@@ -87,32 +88,32 @@
 <!-- ii. operations -->
 <section class="sec" id="operations">
   <header class="sec-head">
-    <h2 class="sec-title">Three<br>operations</h2>
+    <h2 class="sec-title" data-i18n>Three<br>operations</h2>
   </header>
 
-  <p class="prose narrow">IDEA works on 16-bit words and combines them with three operations, each from a different algebraic group. None of them distributes over another or associates with another, so formulas that mix them do not simplify.</p>
+  <p class="prose narrow" data-i18n>IDEA works on 16-bit words and combines them with three operations, each from a different algebraic group. None of them distributes over another or associates with another, so formulas that mix them do not simplify.</p>
 
   <div class="ops">
     <article class="op">
       <svg class="op-glyph" viewBox="-50 -50 100 100" aria-hidden="true"><circle r="46"/><path d="M-46 0H46M0 -46V46"/></svg>
-      <h3>Exclusive or</h3>
-      <p class="op-desc">Bit by bit: equal bits give 0, different give 1. Applying the same word twice undoes it.</p>
+      <h3 data-i18n>Exclusive or</h3>
+      <p class="op-desc" data-i18n>Bit by bit: equal bits give 0, different give 1. Applying the same word twice undoes it.</p>
       <div class="op-calc" data-op="xor">
         <input class="hexw" value="A5A5" maxlength="4" spellcheck="false" aria-label="first word, hex"><span>⊕</span><input class="hexw" value="0F0F" maxlength="4" spellcheck="false" aria-label="second word, hex"><span>=</span><output>AAAA</output>
       </div>
     </article>
     <article class="op">
       <svg class="op-glyph" viewBox="-50 -50 100 100" aria-hidden="true"><rect x="-44" y="-44" width="88" height="88"/><path d="M-26 0H26M0 -26V26"/></svg>
-      <h3>Addition mod 2<sup>16</sup></h3>
-      <p class="op-desc">Ordinary addition, the carry out of bit 15 thrown away. Every word has a negative.</p>
+      <h3 data-i18n>Addition mod 2<sup>16</sup></h3>
+      <p class="op-desc" data-i18n>Ordinary addition, the carry out of bit 15 thrown away. Every word has a negative.</p>
       <div class="op-calc" data-op="add">
         <input class="hexw" value="FFFF" maxlength="4" spellcheck="false" aria-label="first word, hex"><span>⊞</span><input class="hexw" value="0002" maxlength="4" spellcheck="false" aria-label="second word, hex"><span>=</span><output>0001</output>
       </div>
     </article>
     <article class="op">
       <svg class="op-glyph" viewBox="-50 -50 100 100" aria-hidden="true"><circle r="46"/><circle class="dot" r="6"/></svg>
-      <h3>Multiplication mod 2<sup>16</sup>+1</h3>
-      <p class="op-desc">65537 is prime, so every word has an inverse. The word 0 stands for 2<sup>16</sup>, which makes the operation a bijection on all 65536 words.</p>
+      <h3 data-i18n>Multiplication mod 2<sup>16</sup>+1</h3>
+      <p class="op-desc" data-i18n>65537 is prime, so every word has an inverse. The word 0 stands for 2<sup>16</sup>, which makes the operation a bijection on all 65536 words.</p>
       <div class="op-calc" data-op="mul">
         <input class="hexw" value="0000" maxlength="4" spellcheck="false" aria-label="first word, hex"><span>⊙</span><input class="hexw" value="0000" maxlength="4" spellcheck="false" aria-label="second word, hex"><span>=</span><output>0001</output>
       </div>
@@ -120,7 +121,7 @@
   </div>
 
   <div class="heresy">
-    <p class="fig-note">try to distribute ⊙ over ⊞ with the words above</p>
+    <p class="fig-note" data-i18n>try to distribute ⊙ over ⊞ with the words above</p>
     <p class="heresy-line" id="heresy">…</p>
   </div>
 </section>
@@ -128,23 +129,23 @@
 <!-- iii. the round -->
 <section class="sec" id="round">
   <header class="sec-head">
-    <h2 class="sec-title">The round</h2>
+    <h2 class="sec-title" data-i18n>The round</h2>
   </header>
 
   <div class="round-grid">
     <div class="round-side">
-      <p class="prose">The 64-bit block is split into four 16-bit words, X1…X4. Four of the round's six subkeys are applied to them directly. Then the <em>MA-structure</em> (multiply–add) takes two XORs of those words, combines them with the last two subkeys, and its two outputs are XORed back into all four words.</p>
-      <p class="prose">At the end of a round the two middle words swap places. After eight rounds, a half round (the <em>output transformation</em>) undoes the last swap and applies four more subkeys.</p>
+      <p class="prose" data-i18n>The 64-bit block is split into four 16-bit words, X1…X4. Four of the round's six subkeys are applied to them directly. Then the <em>MA-structure</em> (multiply–add) takes two XORs of those words, combines them with the last two subkeys, and its two outputs are XORed back into all four words.</p>
+      <p class="prose" data-i18n>At the end of a round the two middle words swap places. After eight rounds, a half round (the <em>output transformation</em>) undoes the last swap and applies four more subkeys.</p>
 
       <div class="specimen">
-        <label class="field"><span class="lbl">key (hex)</span><input id="sp-key" class="mono-in" value="00010002000300040005000600070008" maxlength="32" spellcheck="false"></label>
-        <label class="field"><span class="lbl">block (hex)</span><input id="sp-block" class="mono-in" value="0000000100020003" maxlength="16" spellcheck="false"></label>
+        <label class="field"><span class="lbl" data-i18n>key (hex)</span><input id="sp-key" class="mono-in" value="00010002000300040005000600070008" maxlength="32" spellcheck="false"></label>
+        <label class="field"><span class="lbl" data-i18n>block (hex)</span><input id="sp-block" class="mono-in" value="0000000100020003" maxlength="16" spellcheck="false"></label>
         <div class="seg" id="sp-dir" role="radiogroup" aria-label="direction">
-          <button type="button" class="on" data-v="enc">encrypt</button><button type="button" data-v="dec">decrypt</button>
+          <button type="button" class="on" data-v="enc" data-i18n>encrypt</button><button type="button" data-v="dec" data-i18n>decrypt</button>
         </div>
-        <p class="sp-out"><span class="lbl">out</span><output id="sp-out">11FB ED2B 0198 6DE5</output></p>
+        <p class="sp-out"><span class="lbl" data-i18n>out</span><output id="sp-out">11FB ED2B 0198 6DE5</output></p>
         <p class="err" id="sp-err" role="alert"></p>
-        <p class="fig-note">Defaults are the worked example from the IDEA description. Expected output: 11FB ED2B 0198 6DE5.</p>
+        <p class="fig-note" data-i18n>Defaults are the worked example from the IDEA description. Expected output: 11FB ED2B 0198 6DE5.</p>
       </div>
     </div>
 
@@ -160,16 +161,16 @@
 <!-- iv. key schedule -->
 <section class="sec" id="schedule">
   <header class="sec-head">
-    <h2 class="sec-title">Key<br>schedule</h2>
+    <h2 class="sec-title" data-i18n>Key<br>schedule</h2>
   </header>
 
   <div class="sched-intro">
-    <p class="prose narrow">The 128-bit key is split into eight 16-bit words, Z1…Z8. Then the whole key is rotated left by 25 bits and split again into Z9…Z16. Six rotations give the 52 subkeys: six per round and four for the output transformation. Hover a subkey to see which key bits it came from.</p>
+    <p class="prose narrow" data-i18n>The 128-bit key is split into eight 16-bit words, Z1…Z8. Then the whole key is rotated left by 25 bits and split again into Z9…Z16. Six rotations give the 52 subkeys: six per round and four for the output transformation. Hover a subkey to see which key bits it came from.</p>
     <figure class="relic sched-fig"><img src="assets/img/relic-rei.jpg" alt="Evangelion: a long row of identical Rei Ayanami clones" loading="lazy"></figure>
   </div>
 
   <div class="bits" id="key-bits" aria-label="the 128 bits of the key"></div>
-  <div class="bits-scale"><span>bit 0</span><span>32</span><span>64</span><span>96</span><span>127</span></div>
+  <div class="bits-scale"><span data-i18n>bit 0</span><span>32</span><span>64</span><span>96</span><span>127</span></div>
 
   <div class="sched" id="sched"></div>
 </section>
@@ -177,18 +178,18 @@
 <!-- v. inversion -->
 <section class="sec" id="inversion">
   <header class="sec-head">
-    <h2 class="sec-title">Inversion</h2>
+    <h2 class="sec-title" data-i18n>Inversion</h2>
   </header>
 
   <div class="inv-grid">
     <div class="prose">
-      <p>Decryption runs the same rounds. Only the subkeys change: they are taken in reverse order, and</p>
-      <ul class="dash">
+      <p data-i18n>Decryption runs the same rounds. Only the subkeys change: they are taken in reverse order, and</p>
+      <ul class="dash" data-i18n>
         <li>keys used with ⊙ become their inverses modulo 65537;</li>
         <li>keys used with ⊞ become their negatives modulo 65536, and in rounds 2–8 the two of them swap places, because the middle words were swapped;</li>
         <li>the MA-structure keys stay as they are: its output is XORed in twice, and XOR undoes itself.</li>
       </ul>
-      <p>So the same code (or chip) does both directions. Switch the round diagram above to <em>decrypt</em> and give it the ciphertext to see it.</p>
+      <p data-i18n>So the same code (or chip) does both directions. Switch the round diagram above to <em>decrypt</em> and give it the ciphertext to see it.</p>
       <figure class="relic inv-fig">
         <img src="assets/img/relic-question.jpg" alt="A drawn face in glasses dissolving into rows of question marks" loading="lazy">
       </figure>
@@ -200,7 +201,7 @@
 <!-- vi. wounds -->
 <section class="sec sec-wounds" id="wounds">
   <header class="sec-head">
-    <h2 class="sec-title">Wounds</h2>
+    <h2 class="sec-title" data-i18n>Wounds</h2>
   </header>
 
   <div class="wounds-grid">
@@ -209,57 +210,57 @@
     </figure>
     <ol class="wounds">
       <li>
-        <p class="w-txt"><b>Weak keys (2<sup>51</sup>).</b> Daemen, Govaerts and Vandewalle (CRYPTO ’93) found a class of 2<sup>51</sup> keys that a chosen-plaintext attacker can detect in use. Later work found larger weak-key classes. Out of 2<sup>128</sup> keys, a randomly chosen one is practically never weak.</p>
+        <p class="w-txt" data-i18n><b>Weak keys (2<sup>51</sup>).</b> Daemen, Govaerts and Vandewalle (CRYPTO ’93) found a class of 2<sup>51</sup> keys that a chosen-plaintext attacker can detect in use. Later work found larger weak-key classes. Out of 2<sup>128</sup> keys, a randomly chosen one is practically never weak.</p>
       </li>
       <li>
-        <p class="w-txt"><b>Narrow bicliques (2<sup>126.1</sup>).</b> Khovratovich, Leurent and Rechberger (EUROCRYPT 2012) recovered the key of the full 8½ rounds about two bits faster than brute force. A theoretical result, not a practical attack.</p>
+        <p class="w-txt" data-i18n><b>Narrow bicliques (2<sup>126.1</sup>).</b> Khovratovich, Leurent and Rechberger (EUROCRYPT 2012) recovered the key of the full 8½ rounds about two bits faster than brute force. A theoretical result, not a practical attack.</p>
       </li>
       <li>
-        <p class="w-txt"><b>64-bit block size (2<sup>32</sup>).</b> After about 2<sup>32</sup> blocks (32&nbsp;GiB) under one key, ciphertext blocks start to collide (birthday paradox), and collisions leak plaintext. Bhargavan and Leurent showed it in practice against 64-bit ciphers in TLS and OpenVPN in 2016 (<a href="https://sweet32.info/">Sweet32</a>). This, not the attacks above, is the practical reason to avoid 64-bit block ciphers today.</p>
+        <p class="w-txt" data-i18n><b>64-bit block size (2<sup>32</sup>).</b> After about 2<sup>32</sup> blocks (32&nbsp;GiB) under one key, ciphertext blocks start to collide (birthday paradox), and collisions leak plaintext. Bhargavan and Leurent showed it in practice against 64-bit ciphers in TLS and OpenVPN in 2016 (<a href="https://sweet32.info/">Sweet32</a>). This, not the attacks above, is the practical reason to avoid 64-bit block ciphers today.</p>
       </li>
     </ol>
   </div>
-  <p class="wounds-end">No practical break of the full cipher with a random key is known. The file tool below avoids the <span class="nobr">2<sup>32</sup>-block</span> limit by deriving a fresh key for every file.</p>
+  <p class="wounds-end" data-i18n>No practical break of the full cipher with a random key is known. The file tool below avoids the <span class="nobr">2<sup>32</sup>-block</span> limit by deriving a fresh key for every file.</p>
 </section>
 
 <!-- vii. modes -->
 <section class="sec" id="modes">
   <header class="sec-head">
-    <h2 class="sec-title">The angel<br>in ECB</h2>
-    <p class="sec-sub">modes of operation</p>
+    <h2 class="sec-title" data-i18n>The angel<br>in ECB</h2>
+    <p class="sec-sub" data-i18n>modes of operation</p>
   </header>
 
-  <p class="prose narrow">IDEA encrypts 8 bytes at a time. A mode of operation decides how a longer message is fed to it. <b>ECB</b> encrypts every block on its own, so equal blocks give equal ciphertext. <b>CBC</b> XORs each block with the previous ciphertext block first. <b>CTR</b> encrypts a counter and XORs the result into the data, which turns IDEA into a stream cipher. Below: the angel's pixels, one byte each, encrypted with IDEA in this page.</p>
+  <p class="prose narrow" data-i18n>IDEA encrypts 8 bytes at a time. A mode of operation decides how a longer message is fed to it. <b>ECB</b> encrypts every block on its own, so equal blocks give equal ciphertext. <b>CBC</b> XORs each block with the previous ciphertext block first. <b>CTR</b> encrypts a counter and XORs the result into the data, which turns IDEA into a stream cipher. Below: the angel's pixels, one byte each, encrypted with IDEA in this page.</p>
 
   <div class="angels">
-    <figure><canvas id="ang-plain" width="256" height="256"></canvas><figcaption class="fig-note">plaintext</figcaption></figure>
-    <figure><canvas id="ang-ecb" width="256" height="256"></canvas><figcaption class="fig-note">ECB: seen this angel?</figcaption></figure>
-    <figure><canvas id="ang-cbc" width="256" height="256"></canvas><figcaption class="fig-note">CBC: noise</figcaption></figure>
-    <figure><canvas id="ang-ctr" width="256" height="256"></canvas><figcaption class="fig-note">CTR: noise</figcaption></figure>
+    <figure><canvas id="ang-plain" width="256" height="256"></canvas><figcaption class="fig-note" data-i18n>plaintext</figcaption></figure>
+    <figure><canvas id="ang-ecb" width="256" height="256"></canvas><figcaption class="fig-note" data-i18n>ECB: seen this angel?</figcaption></figure>
+    <figure><canvas id="ang-cbc" width="256" height="256"></canvas><figcaption class="fig-note" data-i18n>CBC: noise</figcaption></figure>
+    <figure><canvas id="ang-ctr" width="256" height="256"></canvas><figcaption class="fig-note" data-i18n>CTR: noise</figcaption></figure>
   </div>
-  <p class="angels-ctl"><button type="button" class="btn" id="ang-rekey">new key</button><span class="mono-dim" id="ang-key"></span></p>
+  <p class="angels-ctl"><button type="button" class="btn" id="ang-rekey" data-i18n>new key</button><span class="mono-dim" id="ang-key"></span></p>
 </section>
 
 <!-- viii. lab -->
 <section class="sec" id="lab">
   <header class="sec-head">
-    <h2 class="sec-title">Ritual</h2>
-    <p class="sec-sub">encrypt some text</p>
+    <h2 class="sec-title" data-i18n>Ritual</h2>
+    <p class="sec-sub" data-i18n>encrypt some text</p>
   </header>
 
   <div class="lab">
     <div class="lab-ctl">
       <div class="field">
-        <span class="lbl">key</span>
+        <span class="lbl" data-i18n>key</span>
         <div class="seg seg-small" id="lab-keyfmt" role="radiogroup" aria-label="key format">
-          <button type="button" class="on" data-v="text">text</button><button type="button" data-v="hex">hex</button>
+          <button type="button" class="on" data-v="text" data-i18n>text</button><button type="button" data-v="hex">hex</button>
         </div>
         <input id="lab-key" class="mono-in" value="seen this angel?" spellcheck="false" autocomplete="off">
         <p class="hint" id="lab-keyhint"></p>
       </div>
 
       <div class="field">
-        <span class="lbl">mode</span>
+        <span class="lbl" data-i18n>mode</span>
         <div class="seg" id="lab-mode" role="radiogroup" aria-label="mode">
           <button type="button" data-v="0">ECB</button><button type="button" class="on" data-v="1">CBC</button><button type="button" data-v="2">CTR</button>
         </div>
@@ -269,19 +270,19 @@
         <span class="lbl">IV (hex)</span>
         <div class="row">
           <input id="lab-iv" class="mono-in" maxlength="16" spellcheck="false" autocomplete="off">
-          <button type="button" class="btn btn-ghost" id="lab-iv-new">random</button>
+          <button type="button" class="btn btn-ghost" id="lab-iv-new" data-i18n>random</button>
         </div>
       </div>
 
       <div class="field">
-        <span class="lbl">padding</span>
+        <span class="lbl" data-i18n>padding</span>
         <div class="seg seg-small" id="lab-pad" role="radiogroup" aria-label="padding">
-          <button type="button" class="on" data-v="1">PKCS#7</button><button type="button" data-v="0">none</button>
+          <button type="button" class="on" data-v="1">PKCS#7</button><button type="button" data-v="0" data-i18n>none</button>
         </div>
       </div>
 
       <div class="field">
-        <span class="lbl">ciphertext as</span>
+        <span class="lbl" data-i18n>ciphertext as</span>
         <div class="seg seg-small" id="lab-fmt" role="radiogroup" aria-label="ciphertext format">
           <button type="button" class="on" data-v="hex">hex</button><button type="button" data-v="b64">base64</button>
         </div>
@@ -294,20 +295,20 @@
 
     <div class="lab-io">
       <label class="pane">
-        <span class="lbl">plaintext (UTF-8)</span>
+        <span class="lbl" data-i18n>plaintext (UTF-8)</span>
         <textarea id="lab-plain" spellcheck="false">are you real?
 are you real?
 are you real?
 are you real?</textarea>
       </label>
       <div class="lab-acts">
-        <button type="button" class="btn" id="lab-enc">encrypt ↓</button>
-        <button type="button" class="btn" id="lab-dec">decrypt ↑</button>
-        <button type="button" class="btn btn-ghost" id="lab-trace">show the first block in the round diagram</button>
+        <button type="button" class="btn" id="lab-enc" data-i18n>encrypt ↓</button>
+        <button type="button" class="btn" id="lab-dec" data-i18n>decrypt ↑</button>
+        <button type="button" class="btn btn-ghost" id="lab-trace" data-i18n>show the first block in the round diagram</button>
         <span class="mono-dim" id="lab-stat"></span>
       </div>
       <label class="pane">
-        <span class="lbl">ciphertext</span>
+        <span class="lbl" data-i18n>ciphertext</span>
         <textarea id="lab-cipher" spellcheck="false"></textarea>
       </label>
       <p class="err" id="lab-err" role="alert"></p>
@@ -318,8 +319,8 @@ are you real?</textarea>
 <!-- ix. reliquary -->
 <section class="sec" id="reliquary">
   <header class="sec-head">
-    <h2 class="sec-title">Reliquary</h2>
-    <p class="sec-sub">encrypt a file</p>
+    <h2 class="sec-title" data-i18n>Reliquary</h2>
+    <p class="sec-sub" data-i18n>encrypt a file</p>
   </header>
 
   <div class="reli">
@@ -333,22 +334,22 @@ are you real?</textarea>
 
       <div class="reli-ctl">
         <div class="field">
-          <span class="lbl">key</span>
+          <span class="lbl" data-i18n>key</span>
           <div class="seg seg-small" id="reli-keyfmt" role="radiogroup" aria-label="key format">
-            <button type="button" class="on" data-v="text">text</button><button type="button" data-v="hex">hex</button>
+            <button type="button" class="on" data-v="text" data-i18n>text</button><button type="button" data-v="hex">hex</button>
           </div>
           <input id="reli-key" class="mono-in" value="" placeholder="16 bytes of text" spellcheck="false" autocomplete="off">
           <p class="hint" id="reli-keyhint"></p>
         </div>
         <div class="field">
-          <span class="lbl">mode</span>
+          <span class="lbl" data-i18n>mode</span>
           <div class="seg" id="reli-mode" role="radiogroup" aria-label="mode">
             <button type="button" class="on" data-v="cbc">CBC</button><button type="button" data-v="ctr">CTR</button>
           </div>
         </div>
         <div class="reli-acts">
-          <button type="button" class="btn" id="reli-seal" disabled>seal</button>
-          <button type="button" class="btn" id="reli-open" disabled>unseal</button>
+          <button type="button" class="btn" id="reli-seal" disabled data-i18n>seal</button>
+          <button type="button" class="btn" id="reli-open" disabled data-i18n>unseal</button>
         </div>
         <div class="progress" aria-hidden="true"><span id="reli-bar"></span></div>
         <p class="err" id="reli-err" role="alert"></p>
@@ -358,14 +359,14 @@ are you real?</textarea>
     </div>
 
     <div class="reli-right prose">
-      <p>A sealed file is more than plain IDEA. IDEA alone does not notice tampering: anyone could flip bits in the file. And one key for every file would run into the <span class="nobr">2<sup>32</sup>-block</span> limit from <a href="#wounds">Wounds</a>. So:</p>
-      <ul class="dash">
+      <p data-i18n>A sealed file is more than plain IDEA. IDEA alone does not notice tampering: anyone could flip bits in the file. And one key for every file would run into the <span class="nobr">2<sup>32</sup>-block</span> limit from <a href="#wounds">Wounds</a>. So:</p>
+      <ul class="dash" data-i18n>
         <li>a random 8-byte IV is drawn for every file;</li>
         <li>HKDF-SHA256, salted with that IV, turns your 128-bit key into a fresh IDEA key and a separate MAC key;</li>
         <li>the file name and contents are encrypted with IDEA in CBC or CTR mode;</li>
         <li>HMAC-SHA256 covers the header and the ciphertext. When opening, the tag is checked before any plaintext is used.</li>
       </ul>
-      <table class="layout-table">
+      <table class="layout-table" data-i18n>
         <caption class="fig-note">sealed file layout</caption>
         <tr><td>0–3</td><td><code>IDEA</code></td><td>magic</td></tr>
         <tr><td>4</td><td><code>01</code></td><td>format version</td></tr>
@@ -380,8 +381,8 @@ are you real?</textarea>
 </section>
 
 <footer class="colophon">
-  <p class="colo-txt">IDEA is by Xuejia Lai and James&nbsp;L.&nbsp;Massey, ETH Zürich, 1991. The cipher on this page is Rust compiled to WebAssembly and is checked against the NESSIE test vectors and OpenSSL.</p>
-  <p class="colo-txt">Further reading:
+  <p class="colo-txt" data-i18n>IDEA is by Xuejia Lai and James&nbsp;L.&nbsp;Massey, ETH Zürich, 1991. The cipher on this page is Rust compiled to WebAssembly and is checked against the NESSIE test vectors and OpenSSL.</p>
+  <p class="colo-txt" data-i18n>Further reading:
     <a href="https://en.wikipedia.org/wiki/International_Data_Encryption_Algorithm">IDEA on Wikipedia</a>,
     <a href="https://www.cosic.esat.kuleuven.be/nessie/testvectors/bc/idea/Idea-128-64.verified.test-vectors">NESSIE test vectors</a>,
     <a href="https://link.springer.com/chapter/10.1007/978-3-642-29011-4_24">Narrow-Bicliques: Cryptanalysis of Full IDEA</a>,
@@ -394,6 +395,8 @@ are you real?</textarea>
 <script src="assets/wasm/idea_wasm_bytes.js"></script>
 <script src="assets/js/angel-data.js"></script>
 <script src="assets/js/core.js"></script>
+<script src="assets/js/i18n-ru.js"></script>
+<script src="assets/js/i18n.js"></script>
 <script src="assets/js/fx.js"></script>
 <script src="assets/js/anatomy.js"></script>
 <script src="assets/js/lab.js"></script>

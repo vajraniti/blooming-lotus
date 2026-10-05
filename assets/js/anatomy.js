@@ -10,6 +10,8 @@
 
   let W = null;             // wasm exports, set in init()
   const { word, toHex, fromHex } = window.IDEA;
+  const { L: tr, plural } = window.I18N;
+  const roman = i => (i < 8 ? ROMAN[i] : tr('out', 'вых.'));
 
   function el(tag, attrs, parent) {
     const n = document.createElementNS(SVGNS, tag);
@@ -90,9 +92,10 @@
       const rel = left === right ? '=' : '≠';
       heresy.innerHTML =
         `A ⊙ (B ⊞ C) = ${word(left)} <span class="${left === right ? '' : 'no'}">${rel}</span> ${word(right)} = (A ⊙ B) ⊞ (A ⊙ C)` +
-        `<br><span class="mono-dim">A = ${word(A)} from ⊙, B = ${word(B)} and C = ${word(C)} from ⊞</span>`;
+        `<br><span class="mono-dim">${tr(`A = ${word(A)} from ⊙, B = ${word(B)} and C = ${word(C)} from ⊞`, `A = ${word(A)} из ⊙, B = ${word(B)} и C = ${word(C)} из ⊞`)}</span>`;
     }
     Object.values(calcs).forEach(c => { c.a.addEventListener('input', update); c.b.addEventListener('input', update); });
+    window.I18N.onChange(update);
     update();
   }
 
@@ -207,6 +210,9 @@
     return { svg, wires, nodes, ins, outs, keys };
   }
 
+  const outLabels = [];
+  window.I18N.onChange(() => outLabels.forEach(el => { el.textContent = roman(8); }));
+
   const specimen = { key: null, block: null, dir: 'enc', round: 0, trace: null, listeners: [] };
 
   function roundSection() {
@@ -223,8 +229,7 @@
 
     ROMAN.forEach((r, i) => {
       const b = document.createElement('button');
-      b.type = 'button'; b.textContent = r; b.setAttribute('role', 'tab');
-      b.setAttribute('aria-label', i < 8 ? `round ${i + 1}` : 'output transformation');
+      b.type = 'button'; b.setAttribute('role', 'tab');
       b.addEventListener('click', () => { specimen.round = i; paint(true); });
       tabs.appendChild(b);
     });
@@ -264,7 +269,7 @@
         9: [st(8), '⊙', z(6)], 10: [st(7), '⊞', st(9)], 11: [st(1), '⊕', st(9)], 12: [st(3), '⊕', st(9)],
         13: [st(2), '⊕', st(10)], 14: [st(4), '⊕', st(10)],
       }[step];
-      return `step ${step}: ${FORMULA[step - 1]} = ${word(terms[0])} ${terms[1]} ${word(terms[2])} = ${word(st(step))}`;
+      return `${tr('step', 'шаг')} ${step}: ${FORMULA[step - 1]} = ${word(terms[0])} ${terms[1]} ${word(terms[2])} = ${word(st(step))}`;
     });
     bindHover(half, i => {
       const t = specimen.trace;
@@ -291,7 +296,10 @@
           setVal(half.keys[i], t[OUT_BASE + 4 + i], animate);
           setVal(half.outs[i], t[OUT_BASE + 8 + i], animate);
         }
-        cap.textContent = `output transformation: the middle words cross back, then the last four subkeys${specimen.dir === 'dec' ? ' (decryption keys)' : ''}.`;
+        cap.textContent = tr(
+          `output transformation: the middle words cross back, then the last four subkeys${specimen.dir === 'dec' ? ' (decryption keys)' : ''}.`,
+          `выходное преобразование: средние слова меняются местами обратно, затем идут последние четыре подключа${specimen.dir === 'dec' ? ' (ключи расшифровки)' : ''}.`,
+        );
         return;
       }
       const base = specimen.round * ROUND_WORDS;
@@ -301,21 +309,24 @@
       const o = [t[base + 20], t[base + 21], t[base + 22], t[base + 23]];
       o.forEach((v, i) => setVal(full.outs[i], v, animate));
       const z0 = specimen.round * 6 + 1;
-      cap.textContent = `round ${ROMAN[specimen.round]}, subkeys Z${z0}–Z${z0 + 5}${specimen.dir === 'dec' ? ' of the decryption schedule' : ''}. Hover a node.`;
+      cap.textContent = tr(
+        `round ${ROMAN[specimen.round]}, subkeys Z${z0}–Z${z0 + 5}${specimen.dir === 'dec' ? ' of the decryption schedule' : ''}. Hover a node.`,
+        `раунд ${ROMAN[specimen.round]}, подключи Z${z0}–Z${z0 + 5}${specimen.dir === 'dec' ? ' из расписания для расшифровки' : ''}. Наведите курсор на узел.`,
+      );
     }
 
     function recompute() {
       let key, block;
       try {
         key = fromHex(keyIn.value, 'key');
-        if (key.length !== 16) throw new Error(`key: need 32 hex digits, got ${key.length * 2}`);
+        if (key.length !== 16) throw new Error(tr(`key: need 32 hex digits, got ${key.length * 2}`, `ключ: нужно 32 hex-цифры, получено ${key.length * 2}`));
         keyIn.classList.remove('bad');
-      } catch (e) { keyIn.classList.add('bad'); err.textContent = e.message; return; }
+      } catch (e) { keyIn.classList.add('bad'); err.textContent = window.I18N.err(e); return; }
       try {
         block = fromHex(blockIn.value, 'block');
-        if (block.length !== 8) throw new Error(`block: need 16 hex digits, got ${block.length * 2}`);
+        if (block.length !== 8) throw new Error(tr(`block: need 16 hex digits, got ${block.length * 2}`, `блок: нужно 16 hex-цифр, получено ${block.length * 2}`));
         blockIn.classList.remove('bad');
-      } catch (e) { blockIn.classList.add('bad'); err.textContent = e.message; return; }
+      } catch (e) { blockIn.classList.add('bad'); err.textContent = window.I18N.err(e); return; }
       err.textContent = '';
       specimen.key = key; specimen.block = block;
       specimen.trace = W.trace(key, block, specimen.dir === 'dec');
@@ -333,6 +344,14 @@
       specimen.round = 0;
       recompute();
     };
+    function relabel() {
+      Array.from(tabs.children).forEach((b, i) => {
+        b.textContent = roman(i);
+        b.setAttribute('aria-label', i < 8 ? tr(`round ${i + 1}`, `раунд ${i + 1}`) : tr('output transformation', 'выходное преобразование'));
+      });
+    }
+    relabel();
+    window.I18N.onChange(() => { relabel(); recompute(); });
     recompute();
   }
 
@@ -349,12 +368,14 @@
     }
     const grid = document.getElementById('sched');
     const cells = [];
+    const titled = [];
     const head = ['', 'Z1 ⊙', 'Z2 ⊞', 'Z3 ⊞', 'Z4 ⊙', 'Z5 ⊙ MA', 'Z6 ⊙ MA'];
     head.forEach(h => { const d = document.createElement('div'); d.className = 'hd'; d.textContent = h; grid.appendChild(d); });
     for (let r = 0; r < 9; r++) {
       const lab = document.createElement('div');
-      lab.className = 'rlab'; lab.textContent = ROMAN[r];
+      lab.className = 'rlab'; lab.textContent = roman(r);
       grid.appendChild(lab);
+      if (r === 8) outLabels.push(lab);
       for (let c = 0; c < 6; c++) {
         const i = r * 6 + c;
         const d = document.createElement('div');
@@ -369,11 +390,22 @@
         };
         d.addEventListener('mouseenter', () => light(true));
         d.addEventListener('mouseleave', () => light(false));
-        d.title = `Z${i + 1}: key bits ${start}–${(start + 15) % 128}${start + 15 > 127 ? ' (wrapping)' : ''}, after ${g} rotation${g === 1 ? '' : 's'} of 25`;
+        titled.push({ d, i, g, start });
         grid.appendChild(d);
         cells.push(d.querySelector('span'));
       }
     }
+    function titles() {
+      titled.forEach(({ d, i, g, start }) => {
+        const end = (start + 15) % 128, wraps = start + 15 > 127;
+        d.title = tr(
+          `Z${i + 1}: key bits ${start}–${end}${wraps ? ' (wrapping)' : ''}, after ${g} rotation${g === 1 ? '' : 's'} of 25`,
+          `Z${i + 1}: биты ключа ${start}–${end}${wraps ? ' (через конец ключа)' : ''}, после ${g} ${plural(g, 'поворота', 'поворотов', 'поворотов')} на 25`,
+        );
+      });
+    }
+    titles();
+    window.I18N.onChange(titles);
     function update() {
       const key = specimen.key;
       if (!key) return;
@@ -394,8 +426,9 @@
     const cells = [];
     for (let i = 0; i <= 8; i++) {
       const lab = document.createElement('div');
-      lab.className = 'rlab'; lab.textContent = ROMAN[i];
+      lab.className = 'rlab'; lab.textContent = roman(i);
       host.appendChild(lab);
+      if (i === 8) outLabels.push(lab);
       const j = 8 - i;
       const swap = i !== 0 && i !== 8;
       const labels = [
@@ -440,10 +473,14 @@
       ctx.putImageData(img, 0, 0);
     };
     const keyOut = document.getElementById('ang-key');
+    let last = null;
+    const say = () => { if (last) keyOut.textContent = `${tr('key', 'ключ')} ${toHex(last.key, 2)}, IV ${toHex(last.iv)}`; };
+    window.I18N.onChange(say);
     function run() {
       const key = window.IDEA.randomBytes(16);
       const iv = window.IDEA.randomBytes(8);
-      keyOut.textContent = `key ${toHex(key, 2)}, IV ${toHex(iv)}`;
+      last = { key, iv };
+      say();
       draw('ang-ecb', W.encrypt(key, W.Mode.Ecb, new Uint8Array(0), false, px));
       draw('ang-cbc', W.encrypt(key, W.Mode.Cbc, iv, false, px));
       draw('ang-ctr', W.encrypt(key, W.Mode.Ctr, iv, false, px));

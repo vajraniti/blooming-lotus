@@ -3,6 +3,10 @@
 (function () {
   'use strict';
 
+  // core.js loads before i18n.js; every message below is built when it is thrown, by then I18N exists.
+  const L = (en, ru) => (window.I18N ? window.I18N.L(en, ru) : en);
+  const LABELS_RU = { key: 'ключ', block: 'блок', ciphertext: 'шифртекст', iv: 'IV', hex: 'hex' };
+
   const utf8 = new TextEncoder();
   const utf8Strict = new TextDecoder('utf-8', { fatal: true });
 
@@ -11,7 +15,7 @@
     try {
       bin = atob(b64.replace(/\s+/g, ''));
     } catch (_) {
-      throw new Error('not valid base64');
+      throw new Error(L('not valid base64', 'это не base64'));
     }
     const out = new Uint8Array(bin.length);
     for (let i = 0; i < bin.length; i++) out[i] = bin.charCodeAt(i);
@@ -38,12 +42,12 @@
 
   function fromHex(str, what) {
     const clean = str.replace(/\s+/g, '');
-    const label = what || 'hex';
+    const label = L(what || 'hex', LABELS_RU[what || 'hex'] || what);
     if (!/^[0-9a-fA-F]*$/.test(clean)) {
       const bad = clean.match(/[^0-9a-fA-F]/)[0];
-      throw new Error(`${label}: “${bad}” is not a hex digit`);
+      throw new Error(L(`${label}: “${bad}” is not a hex digit`, `${label}: «${bad}» — не hex-цифра`));
     }
-    if (clean.length % 2) throw new Error(`${label}: odd number of hex digits (${clean.length})`);
+    if (clean.length % 2) throw new Error(L(`${label}: odd number of hex digits (${clean.length})`, `${label}: нечётное число hex-цифр (${clean.length})`));
     const out = new Uint8Array(clean.length / 2);
     for (let i = 0; i < out.length; i++) out[i] = parseInt(clean.substr(i * 2, 2), 16);
     return out;
@@ -69,13 +73,16 @@
   function parseKey(fmt, value) {
     if (fmt === 'hex') {
       const b = fromHex(value, 'key');
-      if (b.length !== 16) throw new Error(`key: need 32 hex digits (128 bits), got ${b.length * 2}`);
+      if (b.length !== 16) throw new Error(L(`key: need 32 hex digits (128 bits), got ${b.length * 2}`, `ключ: нужно 32 hex-цифры (128 бит), получено ${b.length * 2}`));
       return b;
     }
     const b = utf8.encode(value);
     if (b.length !== 16) {
-      const wide = b.length !== Array.from(value).length ? ' (letters outside ASCII take 2–4 bytes)' : '';
-      throw new Error(`key: need exactly 16 bytes, got ${b.length}${wide}`);
+      const wide = b.length !== Array.from(value).length;
+      throw new Error(L(
+        `key: need exactly 16 bytes, got ${b.length}${wide ? ' (letters outside ASCII take 2–4 bytes)' : ''}`,
+        `ключ: нужно ровно 16 байт, получено ${b.length}${wide ? ' (буквы не из ASCII, например кириллица, занимают 2–4 байта)' : ''}`,
+      ));
     }
     return b;
   }
